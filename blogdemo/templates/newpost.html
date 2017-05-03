@@ -1,0 +1,35 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="static/main.css">
+  <title>New posts</title>
+</head>
+
+  <body>
+
+
+    <h2>new post</h2>
+
+    <a class="back-main newpost" href="/blog">back to blog</a>
+
+      <form method="post">
+        <label>
+          <div>subject</div>
+          <input type="text" name="subject" value="{{subject}}">
+        </label>
+
+        <label>
+          <div>blog</div>
+          <textarea name="content">{{content}}</textarea>
+        </label>
+
+        <div class="error">{{error}}</div>
+
+        <input type="submit">
+      </form>
+  
+
+  
+
+  </body>
+</html>

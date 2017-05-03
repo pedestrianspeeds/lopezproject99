@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Permalink post</title>
+        <link rel="stylesheet" href="/static/main.css">
+    </head>
+
+    <body>
+
+    {% block content %}
+      {{post.render() | safe}}
+    {% endblock %}
+
+
+    <a class="back-main" href="/blog">
+        back to blog
+    </a>
+    
+    </body>
+</html>
