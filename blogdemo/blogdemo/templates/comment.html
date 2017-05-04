@@ -1,0 +1,30 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/static/main.css">
+  <title>New comments</title>
+</head>
+
+  <body>
+
+<form action="/blog/{{ p.key().id() }}/newcomment" method="POST">
+    <!-- Put form stuff in here -->
+        <label>
+          <div>subject</div>
+          <input type="text" name="subject" value="{{subject}}">
+        </label>
+
+        <label>
+          <div>blog</div>
+          <textarea name="content">{{content}}</textarea>
+        </label>
+
+        <div class="error">{{error}}</div>
+
+        <input type="submit">
+      </form>
+</form>
+
+</body>
+
+</html>
