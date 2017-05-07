@@ -1,0 +1,30 @@
+<div class="comment">
+    <div class="comment-container">
+        <div class="comment-details">
+            <div class="comment-author">
+                {{c.user.name}}
+            </div>
+            <div class="comment-date">
+                {{c.created_at.strftime("%b %d, %Y")}}
+            </div>
+        </div>
+    </div>
+    <p class="comment-content">
+        {{ c.content }}
+    </p>
+    <div class="author-options">
+        {% if user and user.key() == c.user %}
+            <a href="/{{c.post.id()}}/{{c.user.id()}}/editcomment/{{ c.key().id() }}">
+                <div class="comment icon">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </div>
+            </a>
+            <a href="/{{c.post.id()}}/{{c.user.id()}}/deletecomment/{{ c.key().id() }}">
+                <div class="comment icon">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </div>
+            </a>
+        {% endif %}
+    </div>
+</div>
+

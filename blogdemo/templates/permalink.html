@@ -2,18 +2,125 @@
     <head>
         <title>Permalink post</title>
         <link rel="stylesheet" href="/static/main.css">
+        <script src="https://use.fontawesome.com/6d97d6c8a5.js"></script>
     </head>
 
     <body>
+        <a class="back-main edit" href="/blog/{{post.key().id()}}/editpost/">Edit</a>
 
     {% block content %}
       {{post.render() | safe}}
     {% endblock %}
 
-
-    <a class="back-main" href="/blog">
-        back to blog
-    </a>
     
-    </body>
+   <div class="post-options-container">
+        {% if user and user.key().id() == post.user_id %} 
+            <a href="/blog/{{post.key().id()}}/deletepost/{{post.user_id}}">
+                <div><i class="fa fa-trash-o post-options" aria-hidden="true"></i></div>
+            </a>
+            <a href="/{{post.key().id()}}/editpost">
+                <div><i class="fa fa-pencil post-options" aria-hidden="true"></i></div>
+            </a>
+            
+
+        {% endif %} 
+
+ 
+        <!-- {% if user and user.key().id() == post.user_id %} -->
+            <a href="/{{post.key().id()}}/deletepost/{{post.user_id}}">
+                <div><i class="fa fa-trash-o post-options" aria-hidden="true"></i>Foo do fa fa</div>
+            </a>
+            <a href="/{{post.key().id()}}/editpost">
+                <div><i class="fa fa-pencil post-options" aria-hidden="true"></i></div>
+            </a>
+            
+
+        <!-- {% endif %} -->
+
+        {% if user %}
+            <a href="/blog/{{post.key().id()}}/addcomment/{{user.key().id()}}">
+                <div><i class="fa fa-commenting-o post-options" aria-hidden="true"></i></div>
+            </a>
+        {% endif %}
+
+        {% if user and liked %}
+                <a href="/blog/{{post.key().id()}}/unlike"> 
+                    <i class="fa fa-heart post-options post-options-heart" aria-hidden="true"></i>
+                </a>
+
+            {% else %}
+                <a href="/blog/{{post.key().id()}}/like">
+                   <i class="fa fa-heart-o" aria-hidden="true"></i>
+                </a>
+
+        {% endif %}
+    </div>
+
+        
+    <p><strong>Comments:</strong></p>
+        {% for c in comments %}
+          <div>
+            <p>
+                {{c.content}}
+            </p>
+            <form method="post" action="/deletecomment/{{c.key().id()}}">
+            <input style="padding:8px 20px;font-size:10px;color:white;border-radius:6px;border:1px solid;background-color:red;"
+              type="submit" value="Delete">
+            </form>
+            <form method="post" action="/editcomment/{{c.key().id()}}">
+              <input type="hidden" value="{{ c.key().id() }}" name="com_id" />
+              <input style="padding:8px 20px;font-size:10px;color:white;border-radius:6px;border:1px solid;background-color:orange;"
+              type="submit" value="Edit" name="edit">
+            </form>
+          {% endfor %}
+        </div>
+        <br>
+
+        {% if user %}
+                <a href="/blog/{{post.key().id()}}/addcomment/{{user.key().id()}}">
+                    <button>Make a comment</button>
+                </a>
+        {% endif %}
+
+        <div class = "comments">
+            {% for c in comments %}
+                <div class="comment">
+                    <div class="comment-container">
+                        <div class="comment-details">
+                            <div class="comment-author">
+                                {{c.user.name}}
+                            </div>
+                            <div class="comment-date">
+                                {{c.created_at.strftime("%b %d, %Y")}}
+                            </div>
+                        </div>
+                    </div>
+                        <p class="comment-content">
+                            {{ c.format_content() | safe }}
+                        </p>
+                        <div class="author-options">
+                            {% if user and user.key() == c.user.key() %}
+                                <a href="/{{c.post.key().id()}}/{{c.user.key().id()}}/editcomment/{{ c.key().id() }}">
+                                    <div class="comment icon">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                                <a href="/{{c.post.key().id()}}/{{c.user.key().id()}}/deletecomment/{{ c.key().id() }}">
+                                    <div class="comment icon">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                            {% endif %}
+                        </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        
+
+        <a class="back-main newpost" href="/blog">
+            back to blog
+        </a>
+        
+        </body>
 </html>

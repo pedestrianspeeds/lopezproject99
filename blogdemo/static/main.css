@@ -80,7 +80,7 @@ input[type=submit] {
 }
 
 .post + .post {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .post-heading {
@@ -89,7 +89,7 @@ input[type=submit] {
 }
 
 .post-title {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -114,8 +114,22 @@ input[type=submit] {
 
 .newpost {
     text-decoration: none;
+    color: inherit;
 }
 
 .newbutton {
     float: right;
+}
+
+.newcomment {
+    text-decoration: none;
+    color: inherit;
+    float: left;
+    padding-left: 100px;
+}
+
+.edit {
+    float: left;
+    text-decoration: none;
+    color: inherit;
 }

@@ -1,0 +1,29 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/static/main.css">
+  <title>Edit post</title>
+</head>
+
+  <body>
+
+    <h2>edit post</h2>
+
+    <div class="editpost">
+        <div class="editpost__form">
+            <form method="post" autocomplete="off">
+                <input autofocus class="form-input" placeholder="Title" type="text" name="subject" value="{{subject}}">
+                <textarea class="form-textarea" type="text" name="content">{{content}}</textarea>
+                <br>
+                <a href="/blog/{{post_id}}">
+                    <button type="button" id="cancel" class="button form-cancel">back</button>
+                </a>
+                <input class="button form-submit" type="submit" value="save">
+                <span class="form-message error">{{error}}</span>
+            </form>
+        </div>
+    </div>
+
+  </body>
+
+</html>
